@@ -120,16 +120,16 @@ const Safety = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl text-gray-900 dark:text-gray-100">
       {/* Hero Section */}
       <div className="text-center mb-12">
         <div className="flex justify-center mb-4">
-          <div className="p-3 bg-primary/10 rounded-full">
-            <Shield className="h-12 w-12 text-primary" />
+          <div className="p-3 bg-blue-100 dark:bg-gray-800 rounded-full">
+            <Shield className="h-12 w-12 text-blue-600 dark:text-blue-400" />
           </div>
         </div>
-        <h1 className="mb-4">Your Safety is Our Priority</h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <h1 className="mb-4 text-3xl font-bold">Your Safety is Our Priority</h1>
+        <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
           We're committed to providing a safe and secure rideshare experience
           for all our users. Learn about our safety features, guidelines, and
           emergency procedures.
@@ -137,7 +137,7 @@ const Safety = () => {
       </div>
 
       {/* Emergency Alert */}
-      <Alert className="mb-8 border-destructive">
+      <Alert className="mb-8 border-red-600 dark:border-red-400 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-200">
         <AlertTriangle className="h-4 w-4" />
         <AlertTitle>Emergency Situations</AlertTitle>
         <AlertDescription>
@@ -148,10 +148,10 @@ const Safety = () => {
       </Alert>
 
       {/* Emergency Contacts */}
-      <Card className="mb-12">
+      <Card className="mb-12 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Phone className="h-5 w-5" />
+            <Phone className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             Emergency Contacts
           </CardTitle>
           <CardDescription>
@@ -161,12 +161,15 @@ const Safety = () => {
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
             {emergencyContacts.map((contact, index) => (
-              <div key={index} className="text-center p-4 border rounded-lg">
+              <div
+                key={index}
+                className="text-center p-4 border rounded-lg border-gray-200 dark:border-gray-700"
+              >
                 <div className="text-2xl mb-2">{contact.number}</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-gray-700 dark:text-gray-300">
                   {contact.label}
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">
+                <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                   {contact.description}
                 </div>
               </div>
@@ -177,14 +180,17 @@ const Safety = () => {
 
       {/* Safety Features */}
       <section className="mb-12">
-        <h2 className="mb-6 text-center">Safety Features</h2>
+        <h2 className="mb-6 text-center text-2xl font-semibold">Safety Features</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {safetyFeatures.map((feature, index) => (
-            <Card key={index} className="text-center">
+            <Card
+              key={index}
+              className="text-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
+            >
               <CardHeader>
                 <div className="flex justify-center mb-2">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <feature.icon className="h-6 w-6 text-primary" />
+                  <div className="p-2 bg-blue-100 dark:bg-gray-800 rounded-lg">
+                    <feature.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                   </div>
                 </div>
                 <CardTitle className="text-lg">{feature.title}</CardTitle>
@@ -199,21 +205,27 @@ const Safety = () => {
 
       {/* Safety Tips */}
       <section className="mb-12">
-        <h2 className="mb-8 text-center">Safety Guidelines</h2>
+        <h2 className="mb-8 text-center text-2xl font-semibold">Safety Guidelines</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {safetyTips.map((section, index) => (
-            <Card key={index}>
+            <Card
+              key={index}
+              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
+            >
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <section.icon className="h-5 w-5 text-primary" />
+                  <section.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   {section.category}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   {section.tips.map((tip, tipIndex) => (
-                    <li key={tipIndex} className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <li
+                      key={tipIndex}
+                      className="flex items-start gap-2 text-gray-900 dark:text-gray-100"
+                    >
+                      <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{tip}</span>
                     </li>
                   ))}
@@ -226,7 +238,7 @@ const Safety = () => {
 
       {/* Community Standards */}
       <section className="mb-12">
-        <Card>
+        <Card className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Community Standards</CardTitle>
             <CardDescription>
@@ -241,7 +253,7 @@ const Safety = () => {
                   <Badge variant="outline">Required</Badge>
                   Respectful Behavior
                 </h4>
-                <ul className="text-sm space-y-2 text-muted-foreground">
+                <ul className="text-sm space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• Treat all users with respect and courtesy</li>
                   <li>
                     • No harassment, discrimination, or inappropriate behavior
@@ -255,7 +267,7 @@ const Safety = () => {
                   <Badge variant="outline">Prohibited</Badge>
                   Unsafe Activities
                 </h4>
-                <ul className="text-sm space-y-2 text-muted-foreground">
+                <ul className="text-sm space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• No weapons, illegal substances, or contraband</li>
                   <li>• No smoking or vaping in vehicles</li>
                   <li>• No excessive noise or disruptive behavior</li>
@@ -267,10 +279,10 @@ const Safety = () => {
               </div>
             </div>
 
-            <Separator />
+            <Separator className="dark:border-gray-700" />
 
             <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
                 Violations of community standards may result in account
                 suspension or permanent ban.
               </p>
@@ -285,57 +297,37 @@ const Safety = () => {
 
       {/* Additional Resources */}
       <section>
-        <h2 className="mb-6 text-center">Additional Safety Resources</h2>
+        <h2 className="mb-6 text-center text-2xl font-semibold">Additional Safety Resources</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Safety Center</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="mb-4">
-                Access comprehensive safety guides, tutorials, and best
-                practices
-              </CardDescription>
-              <Button variant="outline" className="w-full">
-                Learn More
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Safety Training</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="mb-4">
-                Interactive courses for drivers and riders on safety procedures
-              </CardDescription>
-              <Button variant="outline" className="w-full">
-                Start Training
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Incident Reporting</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="mb-4">
-                Report safety incidents or concerns directly to our safety team
-              </CardDescription>
-              <Button variant="outline" className="w-full">
-                Report Issue
-              </Button>
-            </CardContent>
-          </Card>
+          {["Safety Center", "Safety Training", "Incident Reporting"].map((title, idx) => (
+            <Card
+              key={idx}
+              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
+            >
+              <CardHeader>
+                <CardTitle className="text-lg">{title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-4">
+                  {title === "Safety Center"
+                    ? "Access comprehensive safety guides, tutorials, and best practices"
+                    : title === "Safety Training"
+                    ? "Interactive courses for drivers and riders on safety procedures"
+                    : "Report safety incidents or concerns directly to our safety team"}
+                </CardDescription>
+                <Button variant="outline" className="w-full">
+                  {title === "Incident Reporting" ? "Report Issue" : "Learn More"}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
       {/* Contact Footer */}
-      <div className="mt-12 text-center p-6 bg-muted/50 rounded-lg">
-        <h3 className="mb-2">Need Help?</h3>
-        <p className="text-muted-foreground mb-4">
+      <div className="mt-12 text-center p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <h3 className="mb-2 text-lg font-semibold">Need Help?</h3>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
           Our safety team is here to help 24/7. Don't hesitate to reach out if
           you have any concerns.
         </p>

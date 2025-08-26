@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
 import { RouterProvider } from "react-router/dom";
-import { router } from './routes';
-createRoot(document.getElementById('root')!).render(
+import { router } from "./routes";
+import { ThemeProvider } from "./providers/theme-provider";
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-     <RouterProvider router={router} />
-  </StrictMode>,
-)
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </StrictMode>
+);
