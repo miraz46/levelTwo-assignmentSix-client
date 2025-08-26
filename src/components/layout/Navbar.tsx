@@ -10,7 +10,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-// import { ModeToggle } from "./ModeToggler";
 import { Link, useLocation } from "react-router";
 // import {
 //   authApi,
@@ -21,6 +20,7 @@ import { Link, useLocation } from "react-router";
 // import { role } from "@/constants/role";
 import React from "react";
 import { Car, Home, Phone, Shield } from "lucide-react";
+import { ModeToggle } from "./ModeToggler";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -47,7 +47,7 @@ export default function Navbar() {
   // };
 
   return (
-    <header className="border-b">
+    <header className="border-b sticky top-0 bg-background z-50">
       <div className="container mx-auto px-4 flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          {/* <ModeToggle /> */}
+          <ModeToggle />
           {/* {data?.data?.email && (
             <Button
               onClick={handleLogout}
@@ -170,20 +170,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-// <NavigationMenuItem>
-//   <NavigationMenuLink asChild>
-//     <Link
-//       key={link.label}
-//       to={link.href}
-//       className={`hidden sm:ml-6 sm:flex sm:space-x-8 inline-flex items-center px-1 pt-1 border-b-2 transition-colors ${
-//         location.pathname === link.href
-//           ? "border-primary text-primary"
-//           : "border-transparent text-muted-foreground hover:border-gray-300 hover:text-foreground"
-//       }`}
-//     >
-//       {link.icon && <link.icon className="h-4 w-4 mr-1" />}
-//       {link.label}
-//     </Link>
-//   </NavigationMenuLink>
-// </NavigationMenuItem>
