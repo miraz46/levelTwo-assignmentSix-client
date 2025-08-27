@@ -23,6 +23,7 @@ import {
   useUserInfoQuery,
 } from "@/redux/feature/auth/auth.api";
 import { role } from "@/constants/role";
+import { toast } from "sonner";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -33,8 +34,8 @@ const navigationLinks = [
   { href: "/contact", label: "Contact", role: "PUBLIC", icon: Phone },
   { href: "/faq", label: "FAQ", role: "PUBLIC" },
   { href: "/admin", label: "Dashboard", role: role.ADMIN },
-  { href: "/admin", label: "Dashboard", role: role.DRIVER },
-  { href: "/user", label: "Dashboard", role: role.RIDER },
+  { href: "/driver", label: "Dashboard", role: role.DRIVER },
+  { href: "/rider", label: "Dashboard", role: role.RIDER },
 ];
 
 export default function Navbar() {
@@ -42,9 +43,9 @@ export default function Navbar() {
   const { data } = useUserInfoQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
-
   const handleLogout = async () => {
     await logout(undefined);
+    toast.success("Logout successfully");
     dispatch(authApi.util.resetApiState());
   };
 
@@ -134,7 +135,7 @@ export default function Navbar() {
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     )}
-                    {/* {link.role === data?.data?.role && (
+                    {link.role === data?.data?.role && (
                       <NavigationMenuItem>
                         <NavigationMenuLink
                           asChild
@@ -143,7 +144,7 @@ export default function Navbar() {
                           <Link to={link.href}>{link.label}</Link>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
-                    )} */}
+                    )}
                   </React.Fragment>
                 ))}
               </NavigationMenuList>

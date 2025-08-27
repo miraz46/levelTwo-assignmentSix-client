@@ -1,18 +1,21 @@
 import App from "@/App";
+import { role } from "@/constants/role";
 import About from "@/pages/About";
+import AdminDashboard from "@/pages/AdminDashboard";
 import Contact from "@/pages/Contact";
+import DriverDashboard from "@/pages/DriverDashboard";
 import ErrorPage from "@/pages/ErrorPage";
 import FAQ from "@/pages/FAQ";
 import Features from "@/pages/Features";
 import Homepage from "@/pages/Homepage";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+import RiderDashboard from "@/pages/RiderDashboard";
 import Safety from "@/pages/Safety";
+import Unauthorized from "@/pages/Unauthorized";
+import type { TRole } from "@/types";
+import { withAuth } from "@/utils/withAuth";
 import { createBrowserRouter } from "react-router";
-
-
-
-
 
 export const router = createBrowserRouter([
   {
@@ -47,11 +50,27 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    Component: withAuth(AdminDashboard, role.ADMIN as TRole),
+    path: "/admin",
+  },
+  {
+    Component: withAuth(DriverDashboard, role.DRIVER as TRole),
+    path: "/driver",
+  },
+  {
+    Component: withAuth(RiderDashboard, role.RIDER as TRole),
+    path: "/rider",
+  },
+  {
     Component: Register,
-    path: "/register"
+    path: "/register",
   },
   {
     Component: Login,
-    path: "/login"
-  }
+    path: "/login",
+  },
+  {
+    Component: Unauthorized,
+    path: "/unauthorized",
+  },
 ]);
