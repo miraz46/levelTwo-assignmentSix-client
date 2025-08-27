@@ -18,6 +18,30 @@ export const driverApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["DRIVER"],
         }),
+        acceptRides: builder.mutation({
+            query: (userInfo) => ({
+                url: "/rides/accept/:id",
+                method: "POST",
+                data: userInfo,
+            }),
+            invalidatesTags: ["DRIVER"],
+        }),
+        rejectRides: builder.mutation({
+            query: (userInfo) => ({
+                url: "/rides/reject/:id",
+                method: "POST",
+                data: userInfo,
+            }),
+            invalidatesTags: ["DRIVER"],
+        }),
+        changeRideStatus: builder.mutation({
+            query: (userInfo) => ({
+                url: "/rides/status/:id",
+                method: "POST",
+                data: userInfo,
+            }),
+            invalidatesTags: ["DRIVER"],
+        }),
         driverEarnings: builder.query({
             query: () => ({
                 url: "/drivers/earnings",

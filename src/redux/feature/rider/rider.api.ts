@@ -1,46 +1,32 @@
 import { baseApi } from "@/redux/baseApi";
 
-export const authApi = baseApi.injectEndpoints({
+export const riderApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        login: builder.mutation({
+        requestRides: builder.mutation({
             query: (userInfo) => ({
-                url: "/auth/login",
+                url: "/rides/request",
                 method: "POST",
                 data: userInfo,
             }),
+            invalidatesTags: ["DRIVER", "USER"],
         }),
-        logout: builder.mutation({
+        cancelRides: builder.mutation({
+            query: (userInfo) => ({
+                url: "/rides/cancel/:id",
+                method: "POST",
+                data: userInfo,
+            }),
+            invalidatesTags: ["DRIVER", "USER"]
+        }),
+        getRideHistory: builder.query({
             query: () => ({
-                url: "/auth/logout",
-                method: "POST",
-            }),
-            invalidatesTags: ["USER"],
-        }),
-        resetPassword: builder.mutation({
-            query: (userInfo) => ({
-                url: "/auth/reset-password",
-                method: "POST",
-                data: userInfo,
-            }),
-            invalidatesTags: ["USER"],
-        }),
-        register: builder.mutation({
-            query: (userInfo) => ({
-                url: "/user/register",
-                method: "POST",
-                data: userInfo,
-            }),
-        }),
-        userInfo: builder.query({
-            query: () => ({
-                url: "/user/me",
+                url: "/rides/history",
                 method: "GET",
             }),
-            providesTags: ["USER"]
+            providesTags: ["DRIVER", "USER"]
         }),
-
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useResetPasswordMutation, useUserInfoQuery, useLogoutMutation } = authApi;
+export const { useRequestRidesMutation, useCancelRidesMutation, useGetRideHistoryQuery } = riderApi;
 

@@ -19,8 +19,8 @@ import { Car, Home, Phone, Shield } from "lucide-react";
 import { ModeToggle } from "./ModeToggler";
 import {
   authApi,
+  useGetMeQuery,
   useLogoutMutation,
-  useUserInfoQuery,
 } from "@/redux/feature/auth/auth.api";
 import { role } from "@/constants/role";
 import { toast } from "sonner";
@@ -40,7 +40,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   const location = useLocation();
-  const { data } = useUserInfoQuery(undefined);
+  const { data } = useGetMeQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
   const handleLogout = async () => {

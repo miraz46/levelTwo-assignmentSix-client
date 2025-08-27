@@ -8,7 +8,7 @@ export const adminApi = baseApi.injectEndpoints({
                 method: "POST",
                 data: userInfo,
             }),
-            invalidatesTags: ["USER"]
+            invalidatesTags: ["DRIVER", "USER"]
         }),
         suspendDriver: builder.mutation({
             query: (userInfo) => ({
@@ -16,7 +16,7 @@ export const adminApi = baseApi.injectEndpoints({
                 method: "POST",
                 data: userInfo,
             }),
-            invalidatesTags: ["USER"]
+            invalidatesTags: ["DRIVER", "USER"]
         }),
         getAllRides: builder.query({
             query: (userInfo) => ({
@@ -25,6 +25,14 @@ export const adminApi = baseApi.injectEndpoints({
                 data: userInfo,
             }),
             providesTags: ["RIDES"]
+        }),
+        allStats: builder.query({
+            query: (userInfo) => ({
+                url: "/drivers/all-stats",
+                method: "GET",
+                data: userInfo,
+            }),
+            providesTags: ["RIDES","DRIVER","USER"]
         }),
         getAllUser: builder.query({
             query: (userInfo) => ({
@@ -40,7 +48,7 @@ export const adminApi = baseApi.injectEndpoints({
                 method: "GET",
                 data: userInfo,
             }),
-            providesTags: ["USER"]
+            providesTags: ["DRIVER", "USER"]
         }),
         blockedUser: builder.mutation({
             query: (userInfo) => ({
@@ -48,7 +56,7 @@ export const adminApi = baseApi.injectEndpoints({
                 method: "POST",
                 data: userInfo,
             }),
-            invalidatesTags: ["USER"]
+            invalidatesTags: ["DRIVER", "USER"]
         }),
         unblockedUser: builder.mutation({
             query: (userInfo) => ({
@@ -56,11 +64,11 @@ export const adminApi = baseApi.injectEndpoints({
                 method: "POST",
                 data: userInfo,
             }),
-            invalidatesTags: ["USER"]
+            invalidatesTags: ["DRIVER", "USER"]
         }),
 
     }),
 });
 
-export const { useApproveDriverMutation, useSuspendDriverMutation, useGetAllRidesQuery, useGetAllUserQuery, useGetSingleUserQuery, useBlockedUserMutation, useUnblockedUserMutation } = adminApi;
+export const { useApproveDriverMutation, useSuspendDriverMutation, useGetAllRidesQuery, useGetAllUserQuery, useGetSingleUserQuery, useBlockedUserMutation, useUnblockedUserMutation , useAllStatsQuery} = adminApi;
 

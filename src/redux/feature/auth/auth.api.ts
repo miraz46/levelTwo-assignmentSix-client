@@ -14,7 +14,7 @@ export const authApi = baseApi.injectEndpoints({
                 url: "/auth/logout",
                 method: "POST",
             }),
-            invalidatesTags: ["USER"],
+            invalidatesTags: ["DRIVER", "USER"],
         }),
         resetPassword: builder.mutation({
             query: (userInfo) => ({
@@ -22,7 +22,7 @@ export const authApi = baseApi.injectEndpoints({
                 method: "POST",
                 data: userInfo,
             }),
-            invalidatesTags: ["USER"],
+            invalidatesTags: ["DRIVER", "USER"],
         }),
         register: builder.mutation({
             query: (userInfo) => ({
@@ -31,9 +31,22 @@ export const authApi = baseApi.injectEndpoints({
                 data: userInfo,
             }),
         }),
-
+        updateUser: builder.mutation({
+            query: (userInfo) => ({
+                url: "/user/:id",
+                method: "POST",
+                data: userInfo,
+            }),
+        }),
+        getMe: builder.query({
+            query: () => ({
+                url: "/user/me",
+                method: "GET",
+            }),
+            providesTags: ["DRIVER", "USER"]
+        }),
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useResetPasswordMutation, useLogoutMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation, useResetPasswordMutation, useUpdateUserMutation, useLogoutMutation, useGetMeQuery } = authApi;
 
