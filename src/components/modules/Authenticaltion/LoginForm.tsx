@@ -8,10 +8,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import envVars from "@/config/envVars";
-
 import { cn } from "@/lib/utils";
-import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { useLoginMutation } from "@/redux/feature/auth/auth.api";
 import { type FieldValues, type SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -32,22 +30,17 @@ export function LoginForm({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
-
+      console.log(data);
       if (res.success) {
         toast.success("Logged in successfully");
         navigate("/");
       }
     } catch (err) {
       console.error(err);
-
       if (err.data.message === "Password does not match") {
         toast.error("Invalid credentials");
       }
-
-      if (err.data.message === "User is not verified") {
-        toast.error("Your account is not verified");
-        navigate("/verify", { state: data.email });
-      }
+      toast.error(err.data.message);
     }
   };
 
@@ -104,22 +97,6 @@ export function LoginForm({
             </Button>
           </form>
         </Form>
-
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-
-        {/*//* http://localhost:5000/api/v1/auth/google */}
-        <Button
-          onClick={() => window.open(`${envVars.baseUrl}/auth/google`)}
-          type="button"
-          variant="outline"
-          className="w-full cursor-pointer"
-        >
-          Login with Google
-        </Button>
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

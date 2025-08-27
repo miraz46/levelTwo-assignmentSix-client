@@ -13,10 +13,10 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import Password from "@/components/ui/Password";
+import { useRegisterMutation } from "@/redux/feature/auth/auth.api";
 
 const registerSchema = z
   .object({
@@ -39,13 +39,22 @@ const registerSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password do not match",
     path: ["confirmPassword"],
+  })
+  .superRefine((data, ctx) => {
+    if (data.role === "DRIVER" && !data.driverInfo) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["driverInfo"],
+        message: "Driver info is required for drivers",
+      });
+    }
   });
 
-export function LoginForm({
+export function RegisterForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  // const [register] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -56,7 +65,7 @@ export function LoginForm({
       password: "",
       confirmPassword: "",
       role: "RIDER",
-      driverInfo: { vehicleType: "", licenseNumber: "" },
+      driverInfo: undefined,
     },
   });
 
@@ -70,14 +79,15 @@ export function LoginForm({
       role: data.role,
       driverInfo: data.role === "DRIVER" ? data.driverInfo : undefined,
     };
+    console.log(data);
 
     try {
-      // const result = await register(userInfo).unwrap();
-      toast.success("User created successfully");
-      navigate("/verify");
-    } catch (error) {
+      const result = await register(userInfo).unwrap();
+      toast.success(`${data.role} created successfully`);
+      navigate("/");
+    } catch (error: unknown) {
       console.error(error);
-      toast.error("Registration failed");
+      toast.error(error.data.message);
     }
   };
 
@@ -206,20 +216,6 @@ export function LoginForm({
             </Button>
           </form>
         </Form>
-
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full cursor-pointer"
-        >
-          Login with Google
-        </Button>
       </div>
 
       <div className="text-center text-sm">
